@@ -1,7 +1,7 @@
 const log = document.getElementById("log");
+let history = [];
+let historyPos = 0;
 
-let inputLog = [];
-let inputLogPos = 0;
 
 const jwt = getJWT();
 if(jwt == null || jwtExpired(jwt))
