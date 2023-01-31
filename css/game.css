@@ -1,0 +1,32 @@
+input, hr, span {
+	left: 0;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    width: 100%;
+    position: fixed;
+}
+
+span, input, body {
+    font-size: 1.1em;
+    font-family: "Courier New", Courier, monospace;
+}
+
+span {
+    position: absolute;
+    overflow-y: auto;
+    top: 0;
+    height: 94.5%;
+}
+
+input{
+    resize: none;
+    height: 5%;
+    bottom: 0;
+    outline: none;
+}
+
+hr {
+    bottom: 5%;
+    height: .5%;
+}

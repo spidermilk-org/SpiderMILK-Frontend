@@ -1,0 +1,8 @@
+html, input, a {
+	background-color: whitesmoke;
+	color: black;
+}
+
+input {
+	border-color: black;
+}
