@@ -27,6 +27,9 @@ function jwtExpired(jwt) {
 if(sessionStorage.getItem("log") != null && sessionStorage.getItem("log").length > 0) {
 	overrideLog(sessionStorage.getItem("log"));
 }
+if(sessionStorage.getItem("history") != null && sessionStorage.getItem("history").length > 0) {
+    history = sessionStorage.getItem("history");
+}
 function logAdd(text) {
 	if (log.innerHTML == "")
 		overrideLog(text);
