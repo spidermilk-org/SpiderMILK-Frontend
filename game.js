@@ -1,6 +1,8 @@
 const log = document.getElementById("log");
+const input = document.getElementById("input");
+
 let history = [];
-let historyPos = 0;
+let historyPos = -1;
 
 
 const jwt = getJWT();
@@ -40,4 +42,56 @@ function logAdd(text) {
 }
 function overrideLog(text) {
     log.innerHTML = text;
+}
+
+
+input.onkeydown = async function (event) {
+	if (event.keyCode == 13 && input.value.trim() != "") {
+        input.value = input.value.trim();
+
+        if (input.value == "clear")
+            overrideLog("");
+        else if (input.value == "exit") {
+			sessionStorage.setItem("log", log.innerHTML);
+            sessionStorage.setItem("history", JSON.stringify(history));
+            performAction();
+            window.location.href = "/index.html";
+		}
+        else {
+          logAdd(">" + input.value);
+          logAdd(await performAction());
+        }
+        history.unshift(input.value);
+		historyPos = -1;
+        input.value = "";
+	}
+	else if(event.keyCode == 38 && historyPos < history.length - 1)
+		    input.value = history[++historyPos];
+	else if (event.keyCode == 40) {
+        if(historyPos <= 0) {
+            input.value = "";
+            historyPos = -1;
+        }
+        else
+            input.value = history[--historyPos];
+    }
+}
+
+function performAction() {
+    return fetch("https://game.spidermilk.ddnsfree.com", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            jwt: jwt,
+            action: input.value
+        })
+    }).then(response => {
+        return response.json();
+    }).then(data => {
+        return data.responseText;
+    }).catch(error => {
+        return "An error appeared while trying to communicate with the server. " + error;
+    });
 }
