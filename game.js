@@ -28,7 +28,7 @@ if(sessionStorage.getItem("log") != null && sessionStorage.getItem("log").length
 	overrideLog(sessionStorage.getItem("log"));
 }
 if(sessionStorage.getItem("history") != null && sessionStorage.getItem("history").length > 0) {
-    history = sessionStorage.getItem("history");
+    history = JSON.parse(sessionStorage.getItem("history"));
 }
 function logAdd(text) {
 	if (log.innerHTML == "")
