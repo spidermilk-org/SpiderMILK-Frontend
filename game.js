@@ -20,9 +20,14 @@ function getJWT() {
 }
 
 function jwtExpired(jwt) {
-    const payload = JSON.parse(atob(jwt.split('.')[1]));
-    const now = new Date().getTime() / 1000;
-    return now > payload.exp;
+    try {
+        const payload = JSON.parse(atob(jwt.split('.')[1]));
+        const now = new Date().getTime() / 1000;
+        return now > payload.exp;
+    }
+    catch(error) {
+        return true;
+    }
 }
 
 
