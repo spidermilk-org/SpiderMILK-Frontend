@@ -23,4 +23,39 @@ function checkLogin($email, $password) {
     }
     return null;
 }
+
+function isRegisteredName($name) {
+    $result = db_query("SELECT * FROM users WHERE name = '$name'");
+    $result = json_decode($result, true)[0];
+    return $result["status"] == "OK" && !empty($result["result"]);
+}
+
+function isRegisteredEmail($mail) {
+    $result = db_query("SELECT * FROM users WHERE email = '$mail'");
+    $result = json_decode($result, true)[0];
+    return $result["status"] == "OK" && !empty($result["result"]);
+}
+
+function register($name, $pass, $mail) {
+    $pass = password_hash($pass, PASSWORD_DEFAULT);
+    $result = db_query('BEGIN TRANSACTION;
+    LET $name = "'.$name.'";
+    LET $pass = "'.$pass.'";
+    LET $mail = "'.$mail.'";
+    LET $user = (CREATE users SET
+        name = $name,
+        password = $pass,
+        email = $mail,
+        loggedIn = false,
+        signupDate = time::now(),
+        lastLogin = time::now(),
+        lastSeen = time::now(),
+        language = "en"
+    );
+    RELATE $user ->isInLocation->location:tutorial0;
+    COMMIT TRANSACTION');
+    echo $result;
+    $result = json_decode($result, true)[0];
+    return $result["status"] == "OK";
+}
 ?>
