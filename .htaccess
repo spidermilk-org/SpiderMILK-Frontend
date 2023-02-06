@@ -1,6 +1,6 @@
 <Files "database.php">
-Order allow,deny
-Deny from all
+    Order allow,deny
+    Deny from all
 </Files>
 <Files ".env">
     Order allow,deny
