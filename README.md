@@ -1,4 +1,4 @@
-# SpiderMILK Frontend v0
+# SpiderMILK Frontend v0.1.0
 
 The source code for the frontend of [SpiderMILK](https://spidermilk.ddnsfree.com)
 
