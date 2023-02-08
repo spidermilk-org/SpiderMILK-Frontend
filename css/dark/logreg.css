@@ -1,0 +1,8 @@
+html, input, a {
+	background-color: #202020;
+	color: #999;
+}
+
+input {
+	border-color: #999;
+}

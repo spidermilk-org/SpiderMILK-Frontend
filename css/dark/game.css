@@ -1,0 +1,8 @@
+span, input, body {
+    background-color: #202020;
+    color: #999;
+}
+
+hr {
+    background-color: rgb(61, 61, 61);
+}
