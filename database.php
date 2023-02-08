@@ -54,7 +54,6 @@ function register($name, $pass, $mail) {
     );
     RELATE $user ->isInLocation->location:tutorial0;
     COMMIT TRANSACTION');
-    echo $result;
     $result = json_decode($result, true)[0];
     return $result["status"] == "OK";
 }
