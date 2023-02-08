@@ -37,7 +37,7 @@ function register($name, $pass, $mail) {
     LET $pass = "'.$pass.'";
     LET $mail = "'.$mail.'";
     LET $user = (CREATE users SET
-        name = $name,
+        username = $name,
         password = $pass,
         email = $mail,
         loggedIn = false,
