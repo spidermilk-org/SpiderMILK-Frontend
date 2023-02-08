@@ -86,7 +86,7 @@ function performAction() {
     return fetch("https://game.spidermilk.ddnsfree.com", {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "text/plain"
         },
         body: JSON.stringify({
             jwt: jwt,
