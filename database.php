@@ -24,14 +24,8 @@ function checkLogin($email, $password) {
     return null;
 }
 
-function isRegisteredName($name) {
-    $result = db_query("SELECT * FROM users WHERE name = '$name'");
-    $result = json_decode($result, true)[0];
-    return $result["status"] == "OK" && !empty($result["result"]);
-}
-
-function isRegisteredEmail($mail) {
-    $result = db_query("SELECT * FROM users WHERE email = '$mail'");
+function isRegistered($type, $value) {
+    $result = db_query("SELECT * FROM users WHERE $type = '$value'");
     $result = json_decode($result, true)[0];
     return $result["status"] == "OK" && !empty($result["result"]);
 }

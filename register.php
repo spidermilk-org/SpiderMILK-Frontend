@@ -32,11 +32,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		require "database.php";
 		$isNewData = true;
 
-		if(isRegisteredName($name)){
+		if(isRegistered("name", $name)){
 			$errName = "Name already exists. Please choose another name!";
 			$isNewData = false;
 		}
-		if(isRegisteredEmail($email)){
+		if(isRegistered("email", $email)){
 			$errMail = "Email address is already registered!";
 			$isNewData = false;
 		}
