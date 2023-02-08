@@ -15,7 +15,7 @@ function db_query($query) {
 }
 
 function checkLogin($email, $password) {
-    $result = db_query("select * from users where email = '$email'");
+    $result = db_query("SELECT * FROM users WHERE email = '$email'");
     $result = json_decode($result, true)[0];
     if($result["status"] == "OK" && !empty($result["result"]) && password_verify($password, $result["result"][0]["password"])) {
         db_query("UPDATE users SET lastLogin = time::now(), lastSeen = time::now() WHERE email = $email");
