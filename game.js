@@ -1,9 +1,19 @@
 const log = document.getElementById("log");
 const input = document.getElementById("input");
 
+const url = "https://game.spidermilk.ddnsfree.com";
+
 let history = [];
 let historyPos = -1;
 
+let helpObj = null;
+fetch(url + "/help").then(response => {
+	return response.json();
+}).then(data => {
+	helpObj = data;
+}).catch(error => {
+	logAdd("An error appeared while trying to communicate with the server. " + error);
+});
 
 const jwt = getJWT();
 if(jwt == null || jwtExpired(jwt))
@@ -62,9 +72,25 @@ input.onkeydown = async function (event) {
             performAction();
             window.location.href = "/index.html";
 		}
+		else if (input.value.split(" ")[0] == "help") {
+			logAdd(">" + input.value);
+			const command = input.value.split(" ")[1];
+			if (command == null)
+				logAdd(helpObj.helpMsg);
+			else
+				logAdd(helpObj[command]);
+		}
         else {
-          logAdd(">" + input.value);
-          logAdd(await performAction());
+        	logAdd(">" + input.value);
+			if(input.value.split(" ")[0] == "help") {
+				const command = input.value.split(" ")[1];
+				if (command == null)
+					logAdd(helpObj.helpMsg);
+				else
+					logAdd(helpObj[command]);
+			}
+			else
+        		logAdd(await performAction());
         }
         history.unshift(input.value);
 		historyPos = -1;
@@ -83,7 +109,7 @@ input.onkeydown = async function (event) {
 }
 
 function performAction() {
-    return fetch("https://game.spidermilk.ddnsfree.com", {
+    return fetch(url, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
