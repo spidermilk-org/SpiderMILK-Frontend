@@ -1,0 +1,20 @@
+html, input, a {
+	font-size: 18px;
+}
+
+input {
+	border: 1px solid;
+	border-radius: 3px;
+}
+
+form {
+	position: absolute;
+	left: 37.5%;
+	width: 25%;
+	height: 20%;
+	top: 40%;
+}
+
+.errorMsg {
+	color: red;
+}
