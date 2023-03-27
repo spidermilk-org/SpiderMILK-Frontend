@@ -112,7 +112,7 @@ function performAction() {
     return fetch(url, {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "text/plain"
         },
         body: JSON.stringify({
             jwt: jwt,
